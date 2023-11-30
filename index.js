@@ -33,9 +33,7 @@ app.get("/images/:imageName", (req, res) => {
 
 // important server responses  -> cors,routes,middleware,start
 app.use(
-  cors({
-    origin: "*",
-  })
+  cors()
 );
 app.use("/api/v1/", authRouter);
 app.use("/api/v1/", authMiddleware, paymentRouter);
