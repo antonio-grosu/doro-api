@@ -12,13 +12,13 @@ const path = require("path");
 const fs = require("fs");
 
 // basic server response
-app.get("/", (req, res) => {
+app.get("/api/v1/", (req, res) => {
   res.send("<h1>Server running...</h1> ");
 });
 const imagesFolder = path.join(__dirname, "images");
 
 // Create a route to serve the image
-app.get("/images/:imageName", (req, res) => {
+app.get("/api/v1/images/:imageName", (req, res) => {
   const { imageName } = req.params;
   const imagePath = path.join(imagesFolder, imageName);
 
