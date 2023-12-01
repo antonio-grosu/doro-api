@@ -8,28 +8,6 @@ const authRouter = require("./routes/auth");
 const courseRouter = require("./routes/course");
 const authMiddleware = require("./middleware/auth");
 const cors = require("cors");
-const path = require("path");
-const fs = require("fs");
-
-// basic server response
-app.get("/api/v1/", (req, res) => {
-  res.send("<h1>Server running...</h1> ");
-});
-const imagesFolder = path.join(__dirname, "images");
-
-// Create a route to serve the image
-app.get("/api/v1/images/:imageName", (req, res) => {
-  const { imageName } = req.params;
-  const imagePath = path.join(imagesFolder, imageName);
-
-  // Check if the file exists before sending
-  if (fs.existsSync(imagePath)) {
-    // Send the image file
-    res.sendFile(imagePath);
-  } else {
-    res.status(404).send("Image not found");
-  }
-});
 
 // important server responses  -> cors,routes,middleware,start
 app.use(
@@ -37,6 +15,11 @@ app.use(
     origin: "*",
   })
 );
+
+app.get("/", (req, res) => {
+  res.json("Dorobantu API");
+});
+
 app.use("/api/v1/", authRouter);
 app.use("/api/v1/", authMiddleware, paymentRouter);
 app.use("/api/v1/", authMiddleware, courseRouter);
