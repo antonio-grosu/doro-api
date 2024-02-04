@@ -21,10 +21,10 @@ const paymentController = async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: "https://codevs.ro",
-      cancel_url: "https://facebook.com",
+      success_url: "https://doro-frontend-ten.vercel.app/success",
+      cancel_url: "https://doro-frontend-ten.vercel.app/cancel",
       metadata: {
-        userId: req.body.id, // Replace with the actual user ID
+        userId: req.headers.id, // Replace with the actual user ID
       },
     });
     res.json({ url: session.url });

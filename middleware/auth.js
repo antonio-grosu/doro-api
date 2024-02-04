@@ -3,7 +3,7 @@ const User = require("../models/Users");
 
 const verifyAuth = async (req, res, next) => {
   try {
-    const { id, name } = req.body;
+    const { id, name } = req.headers;
     if (!id || !name) {
       return res.status(401).send("Access Denied: Invalid credentials");
     }

@@ -24,7 +24,22 @@ const login = async (req, res) => {
   }
 
   // If the credentials are correct, send the user object
-  return res.status(200).json({ id: user.id, name: user.name });
+  return res.status(200).json({
+    id: user.id,
+    name: user.name,
+    isPaid: user.isPaid,
+    progress: user.progress,
+  });
+};
+const updateProgress = async (req, res) => {
+  const { id, number } = req.body;
+  const updatedUser = await User.findByIdAndUpdate(
+    { _id: id },
+    { progress: number }
+  );
+  if (!updatedUser) {
+    res.status(500).json({ error: "User could not be updated" });
+  } else res.status(200).json({ success: "User was successfully updated" });
 };
 
-module.exports = { register, login };
+module.exports = { register, login, updateProgress };
