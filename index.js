@@ -12,11 +12,21 @@ const cors = require("cors");
 const User = require("./models/Users");
 
 // important server responses  -> cors,routes,middleware,start
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "htpps://successful-mind.com");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
+app.options("/", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://successful-mind.com");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.sendStatus(204);
+});
+
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.json("Dorobantu API");
